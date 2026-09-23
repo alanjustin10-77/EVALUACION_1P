@@ -40,40 +40,6 @@
 
 **📝 Respuesta:**
 
-#### Diferencias Conceptuales
-* **git clone:** Es un comando que permite copiar un repositorio remoto a nuestra computadora local. Clona todo el historial, ramas y archivos del proyecto, permitiendo trabajar de manera independiente.
-* **fork:** Es una copia completa de un repositorio remoto que se crea directamente en tu cuenta de GitHub. Su propósito es permitirte modificar el código sin afectar el repositorio original.
-* **git pull:** Se utiliza para actualizar el repositorio local con los últimos cambios realizados en el repositorio remoto, combinando los cambios descargados con el trabajo actual.
-
----
-
-#### Parte práctica:
-
-**1. ¿Cómo se realizó el fork?**
-Ingresé al repositorio original del docente (`https://github.com/Alan77-bot/EVALUACION_1P.git`) en GitHub y presioné el botón **Fork** ubicado en la esquina superior derecha. Seleccioné mi cuenta personal para generar la copia exacta en mi perfil.
-
-![Evidencia de Fork](images/Pregunta_1/fork.png)
-
-**2. ¿Cómo se realizó el clone del fork?**
-Copié la URL de mi fork personal y en la terminal de mi computadora ejecuté los siguientes comandos:
-
-git clone [https://github.com/Alan77-bot/EVALUACION_1P.git](https://github.com/Alan77-bot/EVALUACION_1P.git)
-cd EVALUACION_1P
-
-![Evidencia del clone de fork](images/Pregunta_1/clone.png)
-
-**3. ¿Cómo se verificó que se estaba trabajando sobre el fork y no sobre el repositorio original?**
-Ejecuté el comando `git remote -v`, el cual mostró que las direcciones de origen apuntan a mi repositorio personal en GitHub:
-
-origin  [https://github.com/Alan77-bot/EVALUACION_1P.git](https://github.com/Alan77-bot/EVALUACION_1P.git) (fetch)
-origin  [https://github.com/Alan77-bot/EVALUACION_1P.git](https://github.com/Alan77-bot/EVALUACION_1P.git) (push)
-
-![Evidencia del git remote ](images/Pregunta_1/remote.png)
-
-
-
-
-
 
 ---
 
@@ -98,23 +64,7 @@ origin  [https://github.com/Alan77-bot/EVALUACION_1P.git](https://github.com/Ala
 
 ### 📝 Respuesta: Pregunta 2
 
-#### Función del archivo .gitignore
-La función del archivo `.gitignore` es especificarle a Git qué archivos o directorios debe omitir y no rastrear en el historial de versiones. Esto es fundamental en el desarrollo de software para evitar que se suban al repositorio archivos innecesarios como:
-* Archivos temporales o de caché.
-* Registros de errores (archivos `.log`).
-* Carpetas de dependencias o configuración local.
-* Documentación privada que no debe ser compartida en el entorno remoto.
 
----
-
-#### Evidencia de funcionamiento
-Para verificar que las reglas de exclusión configuradas funcionan correctamente, se realizaron las siguientes pruebas:
-
-1. **Archivos `.log` y carpeta `temp/`**: Se crearon en el directorio raíz y Git los ignoró por completo.
-2. **Carpeta `doc/`**: Se agregaron los archivos `prueba.md` y `prueba.txt` dentro de esta carpeta. Tal como se definió en las reglas, Git no los detectó para el rastreo.
-3. **Prueba de exclusión específica**: Se creó un archivo llamado `fuera.md` en la raíz del proyecto. A diferencia de los archivos dentro de `doc/`, este **sí fue rastreado por Git**, demostrando que la regla de ignorar archivos de texto es específica para la carpeta indicada.
-
-![Evidencia de Gitignore](images/Pregunta_2/evidencia_gitignore.png)
 
 ---
 
@@ -144,25 +94,6 @@ Para verificar que las reglas de exclusión configuradas funcionan correctamente
 
 **📝 Respuesta:**
 
-- Git Flow
-
-#### Comandos utilizados
-1. `git flow init`: Inicialización del entorno de trabajo con ramas `main` (producción) y `develop` (desarrollo).
-2. `git flow feature start ingresar-encabezado`: Creación de la rama aislada para trabajar en la nueva funcionalidad.
-3. `git add .` y `git commit -m "..."`: Registro de los avances durante la edición del encabezado.
-4. `git flow feature finish ingresar-encabezado`: Fusión automática de la funcionalidad en la rama `develop` y eliminación de la rama temporal.
-5. `git merge develop`: (Desde main) Integración de la funcionalidad finalizada a la rama principal.
-
-#### Descripción del proceso
-El proceso comenzó preparando el repositorio para una metodología de trabajo organizada. Al iniciar la **feature**, Git Flow nos movió automáticamente a una rama secundaria para no afectar el código estable. Una vez completado el encabezado en el `README.md` con mis datos personales (Jostin Peñaloza, 4to Nivel), se procedió a cerrar la funcionalidad, lo que garantiza que los cambios pasen a la línea de desarrollo antes de llegar a producción.
-
-#### Ventajas de Git Flow
-* **Organización:** Permite trabajar en múltiples funcionalidades al mismo tiempo sin que el código se mezcle de forma desordenada.
-* **Seguridad:** Al usar ramas como `develop`, nos aseguramos de que la rama `main` siempre contenga código que funciona perfectamente.
-* **Escalabilidad:** En proyectos de larga duración o con muchos colaboradores, facilita el manejo de versiones, correcciones urgentes (hotfixes) y lanzamientos (releases) de forma estandarizada.
-
-![Evidencia Git Flow](images/Pregunta_3/GIT_FLOW.png)
----
 
 ## Pregunta 4 (2 puntos)
 
@@ -192,35 +123,11 @@ El proceso comenzó preparando el repositorio para una metodología de trabajo o
 
 Pregunta 4 - Pull Requests
 
-#### Parte Teórica
 
-**¿Qué es un Pull Request y su función?**
-Es una propuesta formal para integrar cambios desde una rama (como `develop`) hacia otra (como `main`). Su función es actuar como un espacio de revisión, discusión y auditoría del código antes de que este pase a una etapa de producción o despliegue.
-
-**¿Por qué es importante revisarlos?**
-Es vital para asegurar la calidad del software. Permite detectar errores, evitar conflictos de fusión (merge conflicts), asegurar que se cumplan los estándares de codificación y verificar que la nueva funcionalidad no rompa procesos existentes.
-
-**¿Qué validaciones se realizan?**
-1. **Calidad del código:** Que sea legible y eficiente.
-2. **Funcionalidad:** Que cumpla con los requisitos del issue o tarea.
-3. **Pruebas:** Que no introduzca bugs y que pase las pruebas automáticas si las hay.
-4. **Seguridad:** Que no exponga datos sensibles o vulnerabilidades.
 
 ---
 
-#### Parte Práctica: Procedimiento Realizado
 
-1. **Trabajo en Develop:** Se respondieron las preguntas teóricas directamente en la rama `develop`.
-2. **Creación de PR:** Se abrió el Pull Request **"Pregunta 4 - Peñaloza Jostin"** desde GitHub.
-3. **Ciclo de Revisión:**
-   * Se usaron los comentarios del PR para solicitar las respuestas faltantes.
-   * Se realizaron commits adicionales para completar la información según las observaciones.
-4. **Fusión:** Una vez aprobado y verificado, se realizó el merge hacia la rama `main`.
-
-**Enlace al Pull Request:** [Insertar aquí el link de tu PR]
-**Número de PR:** #[Insertar número]
-
-![Evidencia de Pull Request](images/Pregunta_4/evidencia_pr.png)
 
 ---
 
